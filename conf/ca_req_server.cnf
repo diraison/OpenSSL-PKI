@@ -1,0 +1,29 @@
+################################################
+#
+#            Server Certificat Request
+#
+################################################
+
+[req]
+default_bits		= 2048
+default_md		= sha256
+distinguished_name	= req_distinguished_name
+req_extensions		= req_extensions
+string_mask		= nombstr
+prompt			= no
+
+[req_distinguished_name]
+countryName		= FR
+stateOrProvinceName	= France
+localityName		= $ENV::LOCALITY_NAME
+organizationName	= $ENV::ORGANIZATION_NAME
+commonName		= $ENV::SERVER_CN
+
+[req_extensions]
+basicConstraints	= critical, CA:false
+subjectKeyIdentifier	= hash
+keyUsage		= digitalSignature, keyEncipherment
+extendedKeyUsage	= serverAuth, clientAuth
+nsCertType		= server
+subjectAltName		= $ENV::SERVER_SAN
+

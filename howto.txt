@@ -1,0 +1,33 @@
+#
+# Repertoires:
+#
+#   conf : fichiers de configuration
+#   scripts : fichiers d'outils (scripts)
+#   csr : certificats non signes
+#   private : cles RSA
+#   certs et newcerts : certificats signes
+#   crl : liste de revocation
+#
+##############################################
+
+# Configuration initiale de l'Autorite de Certification
+./configure-new-ca.sh
+
+# Creer l'Autorite de Certification
+./scripts/ca_init.sh
+
+# Generer la liste de revocation
+./scripts/ca_gen_crl.sh
+
+# Creer un certificat avec sa cle pour un serveur
+./scripts/ca_req_server.sh
+
+# visualiser le certificat non signe
+openssl req -in csr/*.csr -text -noout
+
+# Signature du certicat pour le serveur
+./scripts/ca_sig_server.sh
+
+# Visualiser le certificat signe
+openssl x509 -in certs/*.crt -text -noout
+

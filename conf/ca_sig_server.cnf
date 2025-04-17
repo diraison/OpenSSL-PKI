@@ -1,0 +1,56 @@
+################################################
+#
+#            Server Certificat Signing
+#
+################################################
+
+ca_basedir		= $ENV::CA_BASEDIR
+
+ca_serial_file		= $ca_basedir/serial
+ca_database_file	= $ca_basedir/index.txt
+ca_certs_dir		= $ca_basedir/certs
+ca_new_certs_dir	= $ca_basedir/newcerts
+rootca_cert_file	= $ca_basedir/ca.crt
+rootca_privatekey_file	= $ca_basedir/private/ca.key
+
+server_cert_file	= $ca_basedir/certs/server.crt
+server_privatekey_file	= $ca_basedir/private/server.key
+
+################################################
+
+[ca]
+default_ca		= rootca
+
+[rootca]
+serial			= $ca_serial_file
+database		= $ca_database_file
+certs			= $ca_certs_dir
+new_certs_dir		= $ca_new_certs_dir
+certificate		= $rootca_cert_file
+private_key		= $rootca_privatekey_file
+default_days		= 3650
+default_crl_days	= 30
+default_md		= sha256
+preserve		= no
+x509_extensions		= rootca_x509_extensions
+copy_extensions		= none
+policy			= rootca_policy
+
+[rootca_policy]
+countryName		= supplied
+stateOrProvinceName	= optional
+localityName		= optional
+organizationName	= supplied
+organizationalUnitName	= optional
+commonName		= supplied
+emailAddress		= optional
+
+[rootca_x509_extensions]
+basicConstraints	= critical, CA:false
+authorityKeyIdentifier	= keyid:always
+subjectKeyIdentifier	= hash
+keyUsage		= digitalSignature, keyEncipherment
+extendedKeyUsage	= serverAuth, clientAuth
+nsCertType		= server
+subjectAltName		= $ENV::SERVER_SAN
+

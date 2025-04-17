@@ -1,0 +1,34 @@
+################################################
+#
+#       Auto Signed Certificat Authority
+#
+################################################
+
+ca_basedir		= $ENV::CA_BASEDIR
+
+rootca_cert_file	= $ca_basedir/ca.crt
+rootca_privatekey_file	= $ca_basedir/private/ca.key
+
+################################################
+
+[req]
+default_bits		= 4096
+default_keyfile		= $rootca_privatekey_file
+default_md		= sha256
+distinguished_name	= req_distinguished_name
+x509_extensions		= req_extensions
+string_mask		= nombstr
+prompt			= no
+
+[req_distinguished_name]
+countryName		= FR
+stateOrProvinceName	= France
+localityName		= $ENV::LOCALITY_NAME
+organizationName	= $ENV::ORGANIZATION_NAME
+commonName		= $ENV::COMMON_NAME
+
+[req_extensions]
+basicConstraints	= critical, CA:true
+subjectKeyIdentifier	= hash
+keyUsage		= critical, keyCertSign, cRLSign
+
