@@ -26,6 +26,7 @@
 openssl req -in csr/*.csr -text -noout
 
 # Signature du certicat pour le serveur
+# (mettre les memes infos que pour la creation du certificat)
 ./scripts/ca_sig_server.sh
 
 # Visualiser le certificat signe

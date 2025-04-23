@@ -2,7 +2,7 @@
 
 . $(dirname $0)/../../rootca.config
 
-echo "email address ? "
+echo -n "email address ? "
 read EMAIL_ADDRESS
 
 # sign certificat request

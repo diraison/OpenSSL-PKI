@@ -2,13 +2,13 @@
 
 . $(dirname $0)/../../rootca.config
 
-echo "Organizational Unit Name ? "
+echo -n "Organizational Unit Name ? "
 read ORGANIZATIONAL_UNIT_NAME
-echo "User Name ? "
+echo -n "User Name ? "
 read USER_NAME
-echo "email address ? "
+echo -n "email address ? "
 read EMAIL_ADDRESS
-echo "password ? "
+echo -n "password ? "
 read PASSWORD
 
 export ORGANIZATIONAL_UNIT_NAME USER_NAME EMAIL_ADDRESS

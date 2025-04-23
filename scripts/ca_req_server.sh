@@ -2,9 +2,9 @@
 
 . $(dirname $0)/../rootca.config
 
-echo "nom du serveur [commonName] (ex: www.exemple.local) ? "
+echo -n "identifiant du serveur [commonName] (ex: www.exemple.local) ? "
 read SERVER_CN
-echo "autres noms [subjectAltName] (ex: DNS:exemple.local,IP:127.0.0.1) ? "
+echo -n "noms de domaine et adresses ip [subjectAltName] (ex: DNS:www.exemple.local,IP:127.0.0.1) ? "
 read SERVER_SAN
 export SERVER_CN SERVER_SAN
 
